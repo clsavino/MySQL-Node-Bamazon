@@ -2,8 +2,14 @@
 Amazon-like storefront using MySQL. The app takes in orders from customers and depletes stock from the store's inventory.
 
 # Screenshots
-#### Example 1 - Command line interface showing:
-* inventory,
+#### Example 1 - Command Line Interface showing:
+* initial inventory when database created
+* initial user prompt
+
+![Alt text](/images/bamazonStart.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
+
+#### Example 2 - showing inventory after a few customer orders fulfilled, and failure to fill an order due to insufficient quantity in inventory:
+* current inventory table,
 * customer prompts to order an item, 
 * response to customer's request for quantity of items not in stock,
 * inventory table to help customer order correct quantity,
@@ -13,8 +19,8 @@ Amazon-like storefront using MySQL. The app takes in orders from customers and d
 
 ![Alt text](/images/bamazon1a.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
 
-#### Example 2 - showing order fulfilled on first prompt:
-* inventory table,
+#### Example 3 - showing order fulfilled on first prompt:
+* current inventory table,
 * customer prompt to order an item,
 * Order fulfilled message,
 * updated table showing inventory reduction
