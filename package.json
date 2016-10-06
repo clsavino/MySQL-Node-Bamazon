@@ -1,0 +1,25 @@
+{
+  "name": "mysql-node-bamazon",
+  "version": "1.0.0",
+  "description": "Amazon-like storefront using MySQL. The app takes in orders from customers and depletes stock from the store's inventory.",
+  "main": "BamazonCustomer.js",
+  "dependencies": {
+    "cli-table2": "^0.2.0",
+    "inquirer": "^1.2.1",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clsavino/MySQL-Node-Bamazon.git"
+  },
+  "author": "Christi Savino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clsavino/MySQL-Node-Bamazon/issues"
+  },
+  "homepage": "https://github.com/clsavino/MySQL-Node-Bamazon#readme"
+}
