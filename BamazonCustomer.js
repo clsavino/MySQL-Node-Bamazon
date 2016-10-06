@@ -18,6 +18,7 @@ var connection = mysql.createConnection({
 //  Price DECIMAL(10,2), 
 // 	StockQuantity INTEGER(10),
 //  PRIMARY KEY (ItemID)
+//);
 
 connection.connect(function (err) {
 	if (err) {
