@@ -10,22 +10,12 @@ var connection = mysql.createConnection({
 	password: 'yourpassword',
 	database:  'bamazon'
 });
-//From MySQL workbench bamazon database schema: 
-// CREATE TABLE products (
-// 	ItemID INTEGER(11) AUTO_INCREMENT NOT NULL, 
-//  ProductName  VARCHAR(50) NOT NULL,
-//  DepartmentName VARCHAR(50) NOT NULL, 
-//  Price DECIMAL(10,2), 
-// 	StockQuantity INTEGER(10),
-//  PRIMARY KEY (ItemID)
-//);
 
 connection.connect(function (err) {
 	if (err) {
 		console.log('Error connectig to Db');
 		throw err;
 	}
-	//console.log("Connected as id", connection.threadId);
 });
 
 // Display products database using a table made with the npm package cli-table2
@@ -34,7 +24,6 @@ var displayForPurchase = function(done) {
 connection.query('SELECT * FROM products', function(err, results){		
 		var table = new Table({
 			head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
-		   	//colWidths: [20, 200, 50]
 		});
 		for (var i=0; i <results.length; i++) {
 			table.push(
@@ -49,8 +38,8 @@ connection.query('SELECT * FROM products', function(err, results){
 	});
 }
 
+// Prompt user to enter id and quantity they wish to purchase
 var purchaseItem = function() {
-	//displayTable();
 	inquirer.prompt([{
 		name: "id",
 		type: "input",
@@ -74,13 +63,13 @@ var purchaseItem = function() {
         //    }
         //}	
 	}]).then(function(answer) {
-		//console.log(answer);
+		// Query the database for info about the item including the quantity currently in stock. 
 		connection.query('SELECT ProductName, DepartmentName, Price, StockQuantity FROM products WHERE ?', {ItemID: answer.id}, function(err,res) {
-		//console.log(res);
 			
 		console.log('\nYou would like to buy ' + answer.quantity + ' ' + res[0].ProductName + ' ' + res[0].DepartmentName + ' at $' + res[0].Price + ' each'
 			);
 			if (res[0].StockQuantity >= answer.quantity) {
+				//If enough inventory to complete order, process order by updating database inventory and notifying customer that order is complete. 
 				var itemQuantity = res[0].StockQuantity - answer.quantity;
 				connection.query("UPDATE products SET ? WHERE ?", [
 				{
@@ -91,13 +80,14 @@ var purchaseItem = function() {
 					});	
 				var cost = res[0].Price * answer.quantity;
 				console.log('Order fulfilled! Your cost is $' + cost.toFixed(2));
-				// Order completed - set done = true to end
+				// Order completed, set done = true to end application
 				var done = true;
 				displayForPurchase(done);
 					
 			} else {
+				//If not enought inventory notify customer and display table again and prompt user for item number and quantify desired.
 				console.log('Sorry, Insufficient quantity to fulfill your order!');
-				// Order not completed  - set done = false to continue and prompt user again.
+				// Order not completed, set done = false to continue and prompt user again.
 				var done = false;
 				displayForPurchase(done);
 			}
