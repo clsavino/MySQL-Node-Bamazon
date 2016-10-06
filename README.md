@@ -8,7 +8,8 @@ Amazon-like storefront using MySQL. The app takes in orders from customers and d
 
 ![Alt text](/images/bamazonStart.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
-#### Example 2 - showing inventory after a few customer orders fulfilled, and failure to fill an order due to insufficient quantity in inventory:
+#### Example 2 - Show inventory after a few customer orders fulfilled,
+####             Demonstate failure to fill an order due to insufficient quantity in inventory:
 * current inventory table,
 * customer prompts to order an item, 
 * response to customer's request for quantity of items not in stock,
@@ -19,7 +20,7 @@ Amazon-like storefront using MySQL. The app takes in orders from customers and d
 
 ![Alt text](/images/bamazon1a.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
 
-#### Example 3 - showing order fulfilled on first prompt:
+#### Example 3 - Demonstrate order fulfilled on first prompt:
 * current inventory table,
 * customer prompt to order an item,
 * Order fulfilled message,
