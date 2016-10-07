@@ -50,3 +50,5 @@ var connection = mysql.createConnection({
 	database:  'bamazon'
 });
 ```
+#Acknowlegements
+####Thanks to [Shaun](https://github.com/fullers) for the idea of using the cli-input node package to display the tables.

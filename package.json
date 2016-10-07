@@ -4,9 +4,11 @@
   "description": "Amazon-like storefront using MySQL. The app takes in orders from customers and depletes stock from the store's inventory.",
   "main": "BamazonCustomer.js",
   "dependencies": {
+    "cli-input": "^0.2.0",
     "cli-table2": "^0.2.0",
     "inquirer": "^1.2.1",
-    "mysql": "^2.11.1"
+    "mysql": "^2.11.1",
+    "ttycolor": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
