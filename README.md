@@ -2,30 +2,30 @@
 Amazon-like storefront using MySQL. The app takes in orders from customers and depletes stock from the store's inventory.
 
 # Screenshots
-#### Example 1 - Command Line Interface showing:
-* initial inventory when database created
-* initial user prompt
+#### Bamazon schema in MySQL Workbench
 
-![Alt text](/images/bamazonStart.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
+![Alt text](/images/mysqlWorkbench.PNG?raw=true "Photo of the MySQL Workbench showing the schema and initial inventory")
+
+#### Example 1 - Command Line Interface showing:
+* initial inventory when database created,
+* initial user prompt,
+* order fulrilled message,
+* customer prompts to continue shopping,
+* when custom selects "yes" table displayed with updated stock quantities,
+* customer is prompted for desire to order again
+* order is fulfilled,
+* customer is prompted for desire to order again
+
+
+![Alt text](/images/r1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
 #### Example 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
 * show current inventory table after a few customer orders fulfilled,
 * customer prompts to order an item, 
 * response to customer's request for quantity of items not in stock,
-* inventory table to help customer order correct quantity,
-* new prompt to order,
-* order fulfilled message,
-* updated table showing inventory reduction
+* customer prompt for desire to order again
 
-![Alt text](/images/bamazon1a.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
-
-#### Example 3 - Demonstrate order fulfilled on first prompt:
-* current inventory table,
-* customer prompt to order an item,
-* Order fulfilled message,
-* updated table showing inventory reduction
-
-![Alt text](/images/bamazon1b.PNG?raw=true "Photo showing customer's order and updated inventory table")
+![Alt text](/images/r2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
 
 # Technologies Used
 #### The following technologies and tools were used
@@ -33,7 +33,8 @@ Amazon-like storefront using MySQL. The app takes in orders from customers and d
 * **node.js**
 * **MySQL Workbench**
 
-#### The following npm packages were used 
+#### The following node modules and npm packages were used 
+* **readline**
 * **mysql**
 * **inquirer**
 * **cli-table2**
@@ -51,4 +52,4 @@ var connection = mysql.createConnection({
 });
 ```
 #Acknowlegements
-####Thanks to [Shaun](https://github.com/fullers) for the idea of using the cli-input node package to display the tables.
+####Thanks to [Shaun](https://github.com/fullers) for the idea of using the cli-table2 node package to display the tables.
