@@ -9,21 +9,22 @@ Amazon-like storefront using MySQL. The app takes in orders from customers and d
 #### Example 1 - Command Line Interface showing:
 * initial inventory when database created,
 * initial user prompt,
-* order fulrilled message,
-* customer prompts to continue shopping,
-* when custom selects "yes" table displayed with updated stock quantities,
-* customer is prompted for desire to order again
+* order fulfilled message,
+* cost of items calculated and displayed,
+* customer prompted to continue shopping,
+* when custom selects "yes" the table is displayed with updated stock quantities,
+* customer is prompted to continue shopping,
 * order is fulfilled,
-* customer is prompted for desire to order again
+* customer is prompted again
 
 
 ![Alt text](/images/r1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
 #### Example 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
-* show current inventory table after a few customer orders fulfilled,
-* customer prompts to order an item, 
+* show current inventory table, 
+* customer prompted to order an item, 
 * response to customer's request for quantity of items not in stock,
-* customer prompt for desire to order again
+* customer prompted for desire to order again
 
 ![Alt text](/images/r2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
 
