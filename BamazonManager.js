@@ -1,24 +1,20 @@
 var mysql = require('mysql');
 var Table = require('cli-table2');
 var inquirer = require('inquirer');
-const READLINE = require('readline');
+
 var TASKS = 5;
 
-const RL = READLINE.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+
 
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'christi', //your mysql workbench password goes here
+    password: '', //your mysql workbench password goes here
     database:  'bamazon'
 });
 
 connection.connect(function (err) {
-    console.log('connection created');
     if (err) {
         console.log('Error connectig to Db');
         throw err;
@@ -54,45 +50,52 @@ function viewProducts() {
 
 function viewLowInventory() {
     console.log('entered viewLowInventory');
-    connection.query('SELECT ProductName, StockQuantity FROM products WHERE StockQuantity < 5', function(err,results) {
+    connection.query('SELECT * FROM products WHERE StockQuantity < 5', function(err,results) {
         displayForManager(results); 
         //promptManager();            
     })
 }
 
 function addInventory() {
-        console.log('entered addInventory');
+
+    inquirer.prompt([{
+        name: "id",
+        type: "input",
+        message: " Enter the Item ID of the product",
+
+    }, {
+        name: "quantity",
+        type: "input",
+        message: " Enter quantity you wish to add",
+
+    }]).then(function(answer) {
+
+        connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,res) {
+            itemQuantity = res[0].StockQuantity + parseInt(answer.quantity);
+
+            connection.query("UPDATE products SET ? WHERE ?", [{
+                StockQuantity: itemQuantity
+            }, {
+                ItemID: answer.id
+            }], function(err, results) {
+                console.log('Stock Quantity Updated');
+            });
+
+            connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,res) {
+            displayForManager(res);
+            //displayForManager();
+            //promptManager();
+            });
+
+        });
+    });
+}   
+
+function addProduct() {
+    console.log('entered addProduct');
+    displayForManager(results);
+   //promptManager();
 }
-//     inquirer.prompt([{
-//         name: "id",
-//         type: "input",
-//         message: " Enter the Item ID of the product",
-
-//     }, {
-//         name: "quantity",
-//         type: "input",
-//         message: " Enter quantity you wish to add",
-
-//     }]).then(function(answer) {
-//                 console.log(answer.id,answer.quantity);
-//                 connection.query("UPDATE products SET ? WHERE ?", [{
-//                     StockQuantity: answer.quantity
-//                 }, {
-//                     ItemID: answer.id
-//                 }], function(err, results) {});
-//                 console.log('stock updated');
-//                 displayForManager();
-//                 //promptManager();
-//         })
-// }   
-
-//         // Query the database for info about the item including the quantity currently in stock. 
-//         connection.query('SELECT ProductName, DepartmentName, Price, StockQuantity FROM products WHERE ?', {ItemID: answer.id}, function(err,res) {
-// function addProduct() {
-//     console.log('entered addProduct');
-//     displayForManager(results);
-//    //promptManager();
-// }
 
 function askManager() {
     var managerMsg = [
@@ -108,11 +111,16 @@ function askManager() {
     console.log(managerMsg[i]);
     }
 
-    return RL.question('Which option do you want to choose? ', (answer) => {
-        var choice = parseInt(answer);
-
+    inquirer.prompt({
+        name: "option",
+        type: "input",
+        message: " Which option would you like to perform?\n",
+    }).then(function(answer) {
+        console.log('option chosen ', answer.option);
+        var choice = parseInt(answer.option);
+        console.log('choice ',choice);
         if (choice > 0 && choice <= TASKS) {
-            switch(answer) {
+            switch(answer.option) {
                 case '1':
                      viewProducts();
                      break;
