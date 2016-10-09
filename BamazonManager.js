@@ -8,13 +8,13 @@ var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '', //your mysql workbench password goes here
+    password: 'christi', //your mysql workbench password goes here
     database:  'bamazon'
 });
 
 connection.connect(function (err) {
     if (err) {
-        console.log('Error connectig to Db');
+        console.log('Error connecting to Db');
         throw err;
     }
 });
@@ -48,6 +48,7 @@ function viewProducts() {
 
 function viewLowInventory() {
     connection.query('SELECT * FROM products WHERE StockQuantity < 5', function(err,results) {
+        console.log('\n  All products with quantity lower than 5 shown in Inventory Table\n');
         displayForManager(results); 
         promptManager();            
     })
@@ -74,13 +75,12 @@ function addInventory() {
                 StockQuantity: itemQuantity
             }, {
                 ItemID: answer.id
-            }], function(err, results) {
-                console.log('Stock Quantity Updated');
-            });
+            }], function(err, results) {});
 
-            connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,res) {
-            displayForManager(res);
-            promptManager();
+            connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,results) {
+                console.log('\n The Stock Quantity was updated- see Inventory Table\n');   
+                displayForManager(results);
+                promptManager();
             });
 
         });
@@ -88,34 +88,36 @@ function addInventory() {
 }   
 
 function addProduct() {
-    console.log('entered addProduct');
-        inquirer.prompt([{
-            name: "productName",
-            type: "input",
-            message: " Enter the name of the product",
-        }, {
-            name: "departmentName",
-            type: "input",
-            message: " Enter the department of the product",
-        }, {
-            name: "price",
-            type: "input",
-            message: " Enter price of the product",
-        }, {
-            name: "quantity",
-            type: "input",
-            message: " Enter the quantity",                
-        }]).then(function(answer) {
-            connection.query("INSERT INTO products SET ?", {
-                ProductName: answer.productName,
-                DepartmentName: answer.departmentName,
-                Price: answer.price,
-                StockQuantity: answer.quantity
-            }, function(err, res) {
-                viewProducts();
-                promptManager();                
-            }); 
-        });
+    inquirer.prompt([{
+        name: "productName",
+        type: "input",
+        message: " Enter the name of the product",
+    }, {
+        name: "departmentName",
+        type: "input",
+        message: " Enter the department of the product",
+    }, {
+        name: "price",
+        type: "input",
+        message: " Enter price of the product",
+    }, {
+        name: "quantity",
+        type: "input",
+        message: " Enter the quantity",                
+    }]).then(function(answer) {
+        connection.query("INSERT INTO products SET ?", {
+            ProductName: answer.productName,
+            DepartmentName: answer.departmentName,
+            Price: answer.price,
+            StockQuantity: answer.quantity
+        }, function(err, res) {
+            console.log('\n  The new product was added - See the Inventory Table\n');
+                connection.query('SELECT * FROM products', function(err, results){  
+                    displayForManager(results);
+                    promptManager();
+                });               
+        }); 
+    });
 } 
 
 function askManager() {
@@ -170,15 +172,15 @@ function askManager() {
 }
 
 var displayForManager = function(results) {   
-        var table = new Table({
-            head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
-        });
-        for (var i=0; i <results.length; i++) {
-            table.push(
-                [results[i].ItemID, results[i].ProductName, '$'+ results[i].Price, results[i].StockQuantity]            
-            );          
-        }
-        console.log('\n' + table.toString());
+    var table = new Table({
+        head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
+    });
+    for (var i=0; i <results.length; i++) {
+        table.push(
+            [results[i].ItemID, results[i].ProductName, '$'+ results[i].Price, results[i].StockQuantity]            
+        );          
+    }
+    console.log('\n' + table.toString());
 }
 
 // **** Start the Bamazon Manager Function ****
