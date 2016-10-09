@@ -16,7 +16,7 @@ BamazonManager - allows a manager to:
 # Screenshots
 #### Bamazon schema in MySQL Workbench
 
-![Alt text](/images/mysqlWorkbench.PNG?raw=true "Photo of the MySQL Workbench showing the schema and initial inventory")
+![Alt text](/images/schema.PNG?raw=true "Photo of the MySQL Workbench showing the schema and initial inventory")
 
 #### Example 1 - Command Line Interface showing:
 * initial inventory when database created,
