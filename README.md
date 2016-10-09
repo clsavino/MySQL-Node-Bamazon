@@ -18,7 +18,8 @@ BamazonManager - allows a manager to:
 
 ![Alt text](/images/schema.PNG?raw=true "Photo of the MySQL Workbench showing the schema and initial inventory")
 
-#### Example 1 - Command Line Interface showing:
+## Bamazon Customer App
+#### Screenshot 1 - Command Line Interface showing:
 * initial inventory when database created,
 * initial user prompt,
 * order fulfilled message,
@@ -30,15 +31,35 @@ BamazonManager - allows a manager to:
 * customer is prompted again
 
 
-![Alt text](/images/r1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
+![Alt text](/images/customer1.PNG?raw=true "Photo of the command line interface showing table with initial inventory and customer prompts")
 
-#### Example 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
+#### Screenshot 2 - Demonstate failure to fill an order due to insufficient quantity in inventory:
 * show current inventory after purchases, 
 * customer prompted to order an item, 
 * response to customer's request for quantity of items not in stock,
 * customer prompted for desire to order again
 
-![Alt text](/images/r2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
+![Alt text](/images/customer2.PNG?raw=true "Photo of the command line interface showing table with inventory and customer prompts")
+
+## Bamazon Manager App
+#### Screenshot 1 - Node command line interface showing:
+* View Products for Sale option - Inventory Table displayed. SELECT query used
+* View Low Inventory options - Inventory Table with items with stock quantity less than 5 items, SELECT WHERE query used
+* Prompt Manager to determine if desires to continue 
+
+![Alt text](/images/manager1.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
+
+#### Screenshot 2 - 
+* Add New Product option - prompt Manager to input product name, price, and quantity, INSERT and SELECT queries used
+* Add to Inventory option - prompt Manager to input Item id and quantity to add, display Inventory Table, SELECT and UPDATE queries used
+* Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app
+
+![Alt text](/images/manager2.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
+
+#### Screenshot 3 -
+* All Done option - terminates connection to database using connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
+
+![Alt text](/images/manager3.PNG?raw=true "Photo of the command line interface showing manager option to finish and connection ended cleanly")
 
 # Technologies Used
 #### The following technologies and tools were used
