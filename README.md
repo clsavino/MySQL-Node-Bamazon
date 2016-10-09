@@ -1,10 +1,12 @@
 # MySQL-Node-Bamazon
 Amazon-like storefront using MySQL and Node.js. It is comprised of two apps - one for customer orders and one for manager actions. 
+
 BamazonCustomer:
 * displays a table with the inventory
 * takes a customer's order
 * computes the cost
 * depletes the stock from the store's inventory
+
 BamazonManager - allows a manager to:
 * View Products for Sale 
 * View Low Inventory 
@@ -61,5 +63,5 @@ var connection = mysql.createConnection({
 	database:  'bamazon'
 });
 ```
-#Acknowlegments
+#Acknowledgments
 ####Thanks to [Shaun](https://github.com/fullers) for the idea of using the cli-table2 node package to display the tables.
