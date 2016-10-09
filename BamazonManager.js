@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'christi', //your mysql workbench password goes here
+    password: '', //your mysql workbench password goes here
     database:  'bamazon'
 });
 
@@ -19,6 +19,7 @@ connection.connect(function (err) {
     }
 });
 
+// Prompt Manager for desire to continue or end connection to database
 function promptManager() {
     inquirer.prompt({
         name: "action",
@@ -39,6 +40,7 @@ function promptManager() {
     });
 }
 
+// Select all information from products table to display for Manager, prompt manager for desire to continue
 function viewProducts() {
     connection.query('SELECT * FROM products', function(err, results){        
         displayForManager(results);
@@ -46,6 +48,7 @@ function viewProducts() {
     })
 }
 
+//Select products from database whose quantity is less than 5 items and display in a table, prompt manager if desires to continue
 function viewLowInventory() {
     connection.query('SELECT * FROM products WHERE StockQuantity < 5', function(err,results) {
         console.log('\n  All products with quantity lower than 5 shown in Inventory Table\n');
@@ -54,6 +57,7 @@ function viewLowInventory() {
     })
 }
 
+// Update the quantity of an item already in database, display updated value in a table
 function addInventory() {
 
     inquirer.prompt([{
@@ -87,6 +91,7 @@ function addInventory() {
     });
 }   
 
+// Add a new product into the database with all of it's information, display the Inventory Table, prompt Manager if desires to continue
 function addProduct() {
     inquirer.prompt([{
         name: "productName",
@@ -120,6 +125,7 @@ function addProduct() {
     });
 } 
 
+// Give Manager choices for options to view or update database, give option to terminate, and check for valid choice
 function askManager() {
     var managerMsg = [
     '\nSelect the option number for the option you need:\n',
@@ -171,6 +177,7 @@ function askManager() {
     });
 }
 
+// Displays Inventory Table for Manager, Results from a SELECT query are passed in as parameter and used 
 var displayForManager = function(results) {   
     var table = new Table({
         head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
