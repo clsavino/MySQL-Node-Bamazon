@@ -4,13 +4,11 @@ var inquirer = require('inquirer');
 
 var TASKS = 5;
 
-
-
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '', //your mysql workbench password goes here
+    password: 'christi', //your mysql workbench password goes here
     database:  'bamazon'
 });
 
@@ -49,7 +47,6 @@ function viewProducts() {
 }
 
 function viewLowInventory() {
-    console.log('entered viewLowInventory');
     connection.query('SELECT * FROM products WHERE StockQuantity < 5', function(err,results) {
         displayForManager(results); 
         //promptManager();            
@@ -83,7 +80,6 @@ function addInventory() {
 
             connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,res) {
             displayForManager(res);
-            //displayForManager();
             //promptManager();
             });
 
@@ -93,9 +89,34 @@ function addInventory() {
 
 function addProduct() {
     console.log('entered addProduct');
-    displayForManager(results);
-   //promptManager();
-}
+        inquirer.prompt([{
+            name: "productName",
+            type: "input",
+            message: " Enter the name of the product",
+        }, {
+            name: "departmentName",
+            type: "input",
+            message: " Enter the department of the product",
+        }, {
+            name: "price",
+            type: "input",
+            message: " Enter price of the product",
+        }, {
+            name: "quantity",
+            type: "input",
+            message: " Enter the quantity",                
+        }]).then(function(answer) {
+            connection.query("INSERT INTO products SET ?", {
+                ProductName: answer.productName,
+                DepartmentName: answer.departmentName,
+                Price: answer.price,
+                StockQuantity: answer.quantity
+            }, function(err, res) {
+                viewProducts();
+                //promptManager();                
+            }); //end of connection.query(insert)
+        });// end of  .then
+} // end of addProduct
 
 function askManager() {
     var managerMsg = [
@@ -116,9 +137,9 @@ function askManager() {
         type: "input",
         message: " Which option would you like to perform?\n",
     }).then(function(answer) {
-        console.log('option chosen ', answer.option);
+
         var choice = parseInt(answer.option);
-        console.log('choice ',choice);
+
         if (choice > 0 && choice <= TASKS) {
             switch(answer.option) {
                 case '1':
