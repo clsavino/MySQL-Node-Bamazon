@@ -19,37 +19,37 @@ connection.connect(function (err) {
     }
 });
 
-// function promptManager() {
-//     inquirer.prompt({
-//         name: "action",
-//         type: "list",
+function promptManager() {
+    inquirer.prompt({
+        name: "action",
+        type: "list",
 
-//         message: " Would like to continue?\n",
-//         choices: ["Yes", "No"]
-//     }).then(function(answer) {
-//         switch(answer.action) {
-//             case 'Yes':
-//                 askManager();
-//             break;
+        message: " Would like to continue?\n",
+        choices: ["Yes", "No"]
+    }).then(function(answer) {
+        switch(answer.action) {
+            case 'Yes':
+                askManager();
+            break;
 
-//             case 'No':
-//                 connection.end();
-//             break;
-//         }
-//     })
-// }
+            case 'No':
+                connection.end();
+            break;
+        }
+    });
+}
 
 function viewProducts() {
     connection.query('SELECT * FROM products', function(err, results){        
         displayForManager(results);
-        //promptManager(); 
+        promptManager(); 
     })
 }
 
 function viewLowInventory() {
     connection.query('SELECT * FROM products WHERE StockQuantity < 5', function(err,results) {
         displayForManager(results); 
-        //promptManager();            
+        promptManager();            
     })
 }
 
@@ -80,7 +80,7 @@ function addInventory() {
 
             connection.query('SELECT * FROM products WHERE ?', {ItemID: answer.id},function(err,res) {
             displayForManager(res);
-            //promptManager();
+            promptManager();
             });
 
         });
@@ -113,10 +113,10 @@ function addProduct() {
                 StockQuantity: answer.quantity
             }, function(err, res) {
                 viewProducts();
-                //promptManager();                
-            }); //end of connection.query(insert)
-        });// end of  .then
-} // end of addProduct
+                promptManager();                
+            }); 
+        });
+} 
 
 function askManager() {
     var managerMsg = [
@@ -181,6 +181,7 @@ var displayForManager = function(results) {
         console.log('\n' + table.toString());
 }
 
+// **** Start the Bamazon Manager Function ****
 askManager();
 
 
