@@ -1,5 +1,5 @@
 # MySQL-Node-Bamazon
-Amazon-like storefront using MySQL and Node.js. It is comprised of two apps - one for customer orders and one for manager actions. Uses basic functions of persistant storage. CRUD database operations -  INSPECT, SELECT, UPDATE SQL queries used.
+Amazon-like storefront using MySQL and Node.js. It is comprised of two apps - one for customer orders and one for manager actions. Uses basic functions of persistant storage. CRUD database operations used -  INSPECT, SELECT, and UPDATE SQL queries. Used an exported constructor file to display the inventory in both bamazonCustomer.js and bamazonManager.js
 
 BamazonCustomer:
 * displays a table with the inventory
