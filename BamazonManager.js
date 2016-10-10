@@ -4,7 +4,7 @@ var inquirer = require('inquirer');
 
 var displayTable = require('./displayConstructor.js');
 
-var TASKS = 5;
+var TASKS = 6;
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -127,6 +127,26 @@ function addProduct() {
     });
 } 
 
+function deleteProduct() {
+        inquirer.prompt([{
+        name: "id",
+        type: "input",
+        message: " Enter the Item ID of the product you wish to delete",
+
+    }]).then(function(answer) {
+
+        connection.query("DELETE FROM products WHERE ?", {
+            ItemID: answer.id
+        }, function(err, results) {
+            console.log('\n  The product was deleted - See the Inventory Table\n');
+            connection.query('SELECT * FROM products', function(err, results){  
+                    displayForManager(results);
+                    promptManager();
+            });
+        });
+    });
+}
+
 // Give Manager choices for options to view or update database, give option to terminate, and check for valid choice
 function askManager() {
     var managerMsg = [
@@ -135,7 +155,8 @@ function askManager() {
     "2 - View Low Inventory\n", 
     "3 - Add to Inventory\n", 
     "4 - Add New Product\n",
-    "5 - All Done\n",
+    "5 - Delete Product\n",
+    "6 - All Done\n",
     ];
 
     for (i = 0; i < managerMsg.length; i++) {
@@ -169,8 +190,12 @@ function askManager() {
                      break;
 
                 case '5':
+                     deleteProduct();
+                     break;
+
+                case '6':
                      connection.end();
-                     break;      
+                     break;       
             } 
         } else {
             console.log('Please choose a number between 1 and ' + TASKS);
