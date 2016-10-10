@@ -1,5 +1,5 @@
 # MySQL-Node-Bamazon
-Amazon-like storefront using MySQL and Node.js. It is comprised of two apps - one for customer orders and one for manager actions. Uses basic functions of persistant storage. CRUD database operations used -  INSPECT, SELECT, and UPDATE SQL queries. Used an exported constructor file to display the inventory in both bamazonCustomer.js and bamazonManager.js
+Amazon-like storefront using MySQL and Node.js. It is comprised of two apps - one for customer orders and one for manager actions. Uses basic functions of persistant storage. All 4 CRUD database operations used -  INSPECT, SELECT, UPDATE and DELETE SQL queries. Used an exported constructor file to display the inventory in both bamazonCustomer.js and bamazonManager.js
 
 BamazonCustomer:
 * displays a table with the inventory
@@ -58,9 +58,15 @@ BamazonManager - allows a manager to:
 ![Alt text](/images/manager2.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
 
 #### Screenshot 3 -
+* Delete a product option - prompt Manager for Id of product to delete, DELETE query used 
 * All Done option - terminates connection to database using connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
 
-![Alt text](/images/manager3.PNG?raw=true "Photo of the command line interface showing manager option to finish and connection ended cleanly")
+![Alt text](/images/manager3.PNG?raw=true "Photo of the command line interface showing final manager option - All Done. With this option connection ends cleanly")
+
+#### Screenshot 4 - 
+* Prompt Manager to continue, Manager chooses "No" and connection.end() used for a clean end to database connectionand Node.js app (no need for cntl C)
+
+![Alt text](/images/manager4.PNG?raw=true "Photo of the command line interface showing manager choosing to finish and connection ends cleanly")
 
 # Technologies Used
 #### The following technologies and tools were used
