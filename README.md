@@ -53,7 +53,6 @@ BamazonManager - allows a manager to:
 #### Screenshot 2 - 
 * Add New Product option - prompt Manager to input product name, department, price, and quantity, INSERT and SELECT queries used
 * Add to Inventory option - prompt Manager to input Item id and quantity to add, display Inventory Table, SELECT and UPDATE queries used
-* Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app
 
 ![Alt text](/images/manager2.PNG?raw=true "Photo of the command line interface showing manager option selected and response")
 
@@ -65,7 +64,7 @@ BamazonManager - allows a manager to:
 
 #### Screenshot 4 - 
 * Prompt Manager to continue, Manager chooses "No" and connection.end() used for a clean end to database connectionand Node.js app (no need for cntl C)
-
+* Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
 ![Alt text](/images/manager4.PNG?raw=true "Photo of the command line interface showing manager choosing to finish and connection ends cleanly")
 
 # Technologies Used
