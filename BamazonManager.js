@@ -2,6 +2,8 @@ var mysql = require('mysql');
 var Table = require('cli-table2');
 var inquirer = require('inquirer');
 
+var displayTable = require('./displayConstructor.js');
+
 var TASKS = 5;
 
 var connection = mysql.createConnection({
@@ -179,19 +181,9 @@ function askManager() {
 
 // Displays Inventory Table for Manager, Results from a SELECT query are passed in as parameter and used 
 var displayForManager = function(results) {   
-    var table = new Table({
-        head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
-    });
-    for (var i=0; i <results.length; i++) {
-        table.push(
-            [results[i].ItemID, results[i].ProductName, '$'+ results[i].Price, results[i].StockQuantity]            
-        );          
-    }
-    console.log('\n' + table.toString());
+    var display = new displayTable();
+    display.displayInventoryTable(results);
 }
 
 // **** Start the Bamazon Manager Function ****
 askManager();
-
-
-

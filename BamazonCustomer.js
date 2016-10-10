@@ -1,7 +1,8 @@
 var mysql = require('mysql');
 var Table = require('cli-table2');
 var inquirer = require('inquirer');
-var done = false;
+
+var displayTable = require('./displayConstructor.js');
 
 var connection = mysql.createConnection({
 	host: 'localhost',
@@ -21,17 +22,10 @@ connection.connect(function (err) {
 // Display products database using a table made with the npm package cli-table2
 // then Prompt the user to determine item and quantity they want to purchase
 var displayForUser = function() {
-connection.query('SELECT * FROM products', function(err, results){		
-		var table = new Table({
-			head: ['Item ID', 'Product Name', 'Price', 'Stock Quantity'],
-		});
-		for (var i=0; i <results.length; i++) {
-			table.push(
-				[results[i].ItemID, results[i].ProductName, '$'+ results[i].Price, results[i].StockQuantity]			
-			);			
-		}
-		console.log('\n' + table.toString());
-		purchaseItem();		
+	var display = new displayTable();
+	connection.query('SELECT * FROM products', function(err, results){
+		display.displayInventoryTable(results);
+		purchaseItem();
 	});
 }
 
@@ -66,21 +60,20 @@ var purchaseItem = function() {
 					});	
 				var cost = res[0].Price * answer.quantity;
 				console.log('\n  Order fulfilled! Your cost is $' + cost.toFixed(2) + '\n');
-				// Order completed, set done = true to end application
-				var done = true;
-				continuePrompt();
+				// Order completed
+				customerPrompt();
 					
 			} else {
-				//If not enought inventory notify customer and display table again and prompt user for item number and quantify desired.
+				//If not enought inventory notify customer and prompt customer for desire to shop more
 				console.log('\n  Sorry, Insufficient quantity to fulfill your order!\n');
-				// Order not completed, set done = false to continue and prompt user again.
-				continuePrompt();
+				// Order not completed
+				customerPrompt();
 			}
 		})
     });
 }
 
-var continuePrompt = function() {
+var customerPrompt = function() {
     inquirer.prompt({
         name: "action",
         type: "list",
@@ -100,5 +93,5 @@ var continuePrompt = function() {
     })
 };
 
-// Start app by displaying Bamazon database
-displayForUser(); 
+// Start app by Prompting the customer
+customerPrompt();
