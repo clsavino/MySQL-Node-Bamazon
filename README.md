@@ -63,8 +63,8 @@ BamazonManager - allows a manager to:
 ![Alt text](/images/manager3.PNG?raw=true "Photo of the command line interface showing final manager option - All Done. With this option connection ends cleanly")
 
 #### Screenshot 4 - 
-* Prompt Manager to continue, Manager chooses "No" and connection.end() used for a clean end to database connectionand Node.js app (no need for cntl C)
 * Prompt Manager to determine if desires to continue, "No" is selected which invokes connection.end() for a clean end to database connection and Node.js app (no need for cntl C)
+
 ![Alt text](/images/manager4.PNG?raw=true "Photo of the command line interface showing manager choosing to finish and connection ends cleanly")
 
 # Technologies Used
