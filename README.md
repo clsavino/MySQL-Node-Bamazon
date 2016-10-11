@@ -12,6 +12,7 @@ BamazonManager - allows a manager to:
 * View Low Inventory 
 * Add to Inventory
 * Add New Product
+* Delete a Product
 
 # Screenshots
 #### Bamazon schema in MySQL Workbench
