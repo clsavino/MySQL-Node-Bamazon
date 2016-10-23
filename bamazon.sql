@@ -1,4 +1,5 @@
 -- Creates the "bamazon" database --
+
 CREATE DATABASE bamazon;
 
 -- all of the code will affect "bamazon" --
@@ -6,12 +7,12 @@ USE bamazon;
 
 -- Creates the table "products" within bamazon --
 CREATE TABLE products (
-	ItemID INTEGER(11) AUTO_INCREMENT NOT NULL, 
-    ProductName  VARCHAR(50) NOT NULL,
-    DepartmentName VARCHAR(50) NOT NULL, 
-    Price DECIMAL(10,2), 
+	ItemID INTEGER(11) AUTO_INCREMENT NOT NULL,
+  ProductName  VARCHAR(50) NOT NULL,
+  DepartmentName VARCHAR(50) NOT NULL,
+  Price DECIMAL(10,2),
 	StockQuantity INTEGER(10),
-    PRIMARY KEY (ItemID)  
+  PRIMARY KEY (ItemID)
 );
 
 INSERT INTO products (ProductName,DepartmentName,Price,StockQuantity)
